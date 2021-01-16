@@ -3,10 +3,13 @@
  * This is a service layer that provides the business logic to show "spreadsheet" 
  * of employees, etc that the user chooses from the main menu or a submenu
  * 
- * Database implementation are not here. That will be in a database access layer
- * at models/, for separation of concerns.
+ * To keep separation of concerns, this business logic is not aware of Database
+ * implementations. Those are in a database access layer at models/.
  * 
  */
+
+/** Business logic requires that the user sees a spreadsheet of employees */
+const cTable = require("console.table");
 
 // const employees = require("../models/employees");
 
