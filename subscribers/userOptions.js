@@ -1,17 +1,35 @@
+/**
+ * @file
+ * These are subscribers that listen to user options from the Main Menu.
+ * 
+ * For options that don't require additional input (such as viewing all employees),
+ * we will call the appropriate service (which has the business logic).
+ * 
+ * For options that require additional input, we will call additional views (views/cli).
+ * 
+ */
+
+const { showSpreadsheetEmployees } = require("../services/spreadsheet");
+
 module.exports = {
     viewAllEmployees: (context) => {
+        if (!context) context = {};
         let { groupBy } = context;
+
         switch (groupBy) {
             case "DEPT":
                 console.log("Viewing all employees by department:");
+                showSpreadsheetEmployees({ groupBy });
                 break;
 
             case "MANAGER":
                 console.log("Viewing all employees by manager:");
+                showSpreadsheetEmployees({ groupBy });
                 break;
 
             default: // null
                 console.log("Viewing all employees:");
+                showSpreadsheetEmployees();
 
         }
     },
