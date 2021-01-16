@@ -19,3 +19,22 @@ if (fs.existsSync("./config/.env")) {
         });
     });
 }
+
+describe("Testing title ascii art", () => {
+    /** Test title ascii art by checking if border text art _______ is a substring 
+     *  and also whether console.log was passed the title ascii art.
+     */
+    const asciiArtDisplayer = require("../views/asciiArtTitle.js");
+    const asciiArtDisplayerText = asciiArtDisplayer.text;
+    const testValueAsciiBorder = "_______";
+
+    test("Test title ascii art value", () => {
+        expect(asciiArtDisplayerText).toEqual(expect.stringContaining(testValueAsciiBorder));
+    });
+    test("Test title ascii art console.log", () => {
+        const consoleSpy = jest.spyOn(console, "log");
+
+        asciiArtDisplayer.displayAsciiArtTitle();
+        expect(consoleSpy).toHaveBeenCalledWith(asciiArtDisplayerText);
+    })
+});
