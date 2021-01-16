@@ -38,3 +38,30 @@ describe("Testing title ascii art", () => {
         expect(consoleSpy).toHaveBeenCalledWith(asciiArtDisplayerText);
     })
 });
+
+describe("Testing table generation", () => {
+    /** Test table generation by checking if having two
+     *  header titles would produce two header borders
+     *  from console.table's getTable method. 
+     */
+    test("Test table has at least two column borders for a 2x2 table", () => {
+        const cTable = require("console.table");
+        const testValueTwoColumnBorders = "-------  -------";
+        const tableValues = [{
+            header1: 'A',
+            header2: 1
+        }, {
+            header1: 'B',
+            header2: 2
+        }];
+
+        // Get the table text that would show to terminal
+        const tableString = cTable.getTable(tableValues);
+
+        // Show to terminal
+        console.log(tableString);
+
+        // Test table has at least two column borders
+        expect(tableString).toEqual(expect.stringContaining(testValueTwoColumnBorders));
+    });
+});
