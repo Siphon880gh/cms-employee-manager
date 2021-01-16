@@ -1,3 +1,8 @@
+/** @file
+ * ASCII Art Title value and displayer to the terminal
+ * 
+ */
+
 module.exports = {
     text: `
     __________________________________________________________________

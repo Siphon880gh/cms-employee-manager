@@ -1,17 +1,50 @@
+/**
+ * @file
+ * Main Menu that lets user choose how to manage the employees.
+ * 
+ * To keep the code organized, each user option will emit
+ * an event to have another inquirer view take over, following
+ * a Publisher-Subscriber pattern. Also, the user options will
+ * be constants to prevent typos that break the code when adding
+ * new user options.
+ * 
+ */
+
 const inquirer = require("inquirer");
 
+/** The questions that serve as inquirer messages and events */
+const constantMenuOptions = {
+    viewAllEmployees: "View All Employees",
+    viewAllEmployeesByDept: "View All Employees By Department",
+    viewAllEmployeesByManager: "View All Employees By Manager",
+    addEmployee: "Add Employee",
+    removeEmployee: "Remove Employee",
+    updateEmployeeRole: "Update Employee Role",
+    updateEmployeeManager: "Update Employee Manager",
+    exit: "-- Exit --"
+}
+
+/** Setup Publisher-Subscriber pattern in the main menu */
+const events = require('events');
+const eventEmitter = new events.EventEmitter();
+
+/** Subscribers that hold the event handlers for the async user options
+ *  Note: The subscriber viewAllEmployees will handle viewing all employees, employees grouped by Department, 
+ *        and employees grouped by Manager 
+ */
+const subscribers = require("../../subscribers/userOptions");
+eventEmitter.on(constantMenuOptions.viewAllEmployees, subscribers.viewAllEmployees);
+eventEmitter.on(constantMenuOptions.viewAllEmployeesByDept, subscribers.viewAllEmployees);
+eventEmitter.on(constantMenuOptions.viewAllEmployeesByManager, subscribers.viewAllEmployees);
+eventEmitter.on(constantMenuOptions.addEmployee, subscribers.addEmployee);
+eventEmitter.on(constantMenuOptions.removeEmployee, subscribers.removeEmployee);
+eventEmitter.on(constantMenuOptions.updateEmployeeRole, subscribers.updateEmployeeRole);
+eventEmitter.on(constantMenuOptions.updateEmployeeManager, subscribers.updateEmployeeManager);
+eventEmitter.on(constantMenuOptions.exit, subscribers.exit);
+
+/** Inquirer that asks user how to manage the main menu, then emits the user option */
 module.exports = {
     inquirer: () => {
-        const constantMenuOptions = {
-            viewAllEmployees: "View All Employees",
-            viewAllEmployeesByDept: "View All Employees By Department",
-            viewAllEmployeesByManager: "View All Employees By Manager",
-            addEmployee: "Add Employee",
-            removeEmployee: "Remove Employee",
-            updateEmployeeRole: "Update Employee Role",
-            updateEmployeeManager: "Update Employee Manager",
-            exit: "-- Exit --"
-        }
 
         inquirer.prompt([{
                 name: "menuOption",
@@ -25,35 +58,29 @@ module.exports = {
                     constantMenuOptions.removeEmployee,
                     constantMenuOptions.updateEmployeeRole,
                     constantMenuOptions.updateEmployeeManager,
-                    constantMenuOptions.exit,
+                    constantMenuOptions.exit
                 ]
             }]).then(answers => {
                 const { menuOption } = answers;
                 switch (menuOption) {
                     case constantMenuOptions.viewAllEmployees:
-                        console.log("Viewing all employees:");
+                        eventEmitter.emit(constantMenuOptions.viewAllEmployees);
                         break;
                     case constantMenuOptions.viewAllEmployeesByDept:
-                        console.log("Viewing all employees by department:");
+                        eventEmitter.emit(constantMenuOptions.viewAllEmployees, { groupBy: "DEPT" });
                         break;
                     case constantMenuOptions.viewAllEmployeesByManager:
-                        console.log("Viewing all employees by manager:");
+                        eventEmitter.emit(constantMenuOptions.viewAllEmployees, { groupBy: "MANAGER" });
                         break;
                     case constantMenuOptions.addEmployee:
-                        console.log("Fill information on the new employee:");
                         break;
                     case constantMenuOptions.removeEmployee:
-                        console.log("Which employee do you want to remove?");
                         break;
                     case constantMenuOptions.updateEmployeeRole:
-                        console.log("Which employee's role do you want to update?");
                         break;
                     case constantMenuOptions.updateEmployeeManager:
-                        console.log("Which employee's manager do you want to update?");
                         break;
                     case constantMenuOptions.exit:
-                        console.log("Thank you for using Employee Manager.");
-                        process.exit(0)
                         break;
                 }
             })
