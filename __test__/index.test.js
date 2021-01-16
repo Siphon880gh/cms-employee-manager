@@ -65,3 +65,23 @@ describe("Testing table generation", () => {
         expect(tableString).toEqual(expect.stringContaining(testValueTwoColumnBorders));
     });
 });
+
+describe("Testing EventEmitter for future Publish–Subscribe pattern implementation", () => { // Import events module
+    var events = require('events');
+    var eventEmitter = new events.EventEmitter();
+
+    const constantEvents = {
+        raiseFlag: "raise color"
+    }
+    const raiseFlagEventHandler = (color) => {
+        console.log(`${color} flag`);
+    }
+
+    /** Delegate riase flag event handler */
+    eventEmitter.on(constantEvents.raiseFlag, raiseFlagEventHandler);
+
+    /** Emit raise flag event and pass a context of flag color red */
+    const consoleSpy = jest.spyOn(console, "log");
+    eventEmitter.emit(constantEvents.raiseFlag, "red");
+    expect(consoleSpy).toHaveBeenCalledWith("red flag");
+});
