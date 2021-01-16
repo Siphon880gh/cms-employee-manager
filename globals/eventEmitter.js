@@ -22,5 +22,11 @@ eventEmitter.on(constantMenuOptions.removeEmployee, subscribers.removeEmployee);
 eventEmitter.on(constantMenuOptions.updateEmployeeRole, subscribers.updateEmployeeRole);
 eventEmitter.on(constantMenuOptions.updateEmployeeManager, subscribers.updateEmployeeManager);
 eventEmitter.on(constantMenuOptions.exit, subscribers.exit);
+eventEmitter.on(constantMenuOptions.mainMenu, returnToMainMenu);
+
+function returnToMainMenu() {
+    const mainMenu = require("../views/cli/mainMenu");
+    mainMenu.inquirer();
+}
 
 module.exports = eventEmitter;

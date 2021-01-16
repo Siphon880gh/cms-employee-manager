@@ -10,6 +10,7 @@
 
 /** Business logic requires that the user sees a spreadsheet of employees */
 const cTable = require("console.table");
+const eventEmitter = require("../globals/eventEmitter");
 
 // const employees = require("../models/employees");
 
@@ -20,13 +21,16 @@ module.exports = {
 
         switch (groupBy) {
             case "DEPT":
-                console.log("Servicing employee spreadsheet grouped by department:")
+                console.log("Servicing employee spreadsheet grouped by department:");
+                global.eventEmitter.emit("Main Menu");
                 break;
             case "MANAGER":
-                console.log("Servicing employee spreadsheet grouped by manager:")
+                console.log("Servicing employee spreadsheet grouped by manager:");
+                global.eventEmitter.emit("Main Menu");
                 break;
             default:
-                console.log("Servicing employee spreadsheet:")
+                console.log("Servicing employee spreadsheet:");
+                global.eventEmitter.emit("Main Menu");
         }
     }
 }

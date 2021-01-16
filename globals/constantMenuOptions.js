@@ -13,7 +13,8 @@ const constantMenuOptions = {
     removeEmployee: "Remove Employee",
     updateEmployeeRole: "Update Employee Role",
     updateEmployeeManager: "Update Employee Manager",
-    exit: "-- Exit --"
+    exit: "-- Exit --",
+    mainMenu: "Main Menu"
 }
 
 module.exports = constantMenuOptions;
