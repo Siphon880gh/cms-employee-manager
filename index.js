@@ -12,9 +12,15 @@ const db = require("./dal/Db");
  * constants to prevent typos that break the code when adding
  * new user options. The globals will be required below. 
  * 
+ * Added a global state variable because it was becoming too
+ * word to pass variables between the multiple layers especially
+ * when some options like Add Employee will go through the layers
+ * multiple times.
+ * 
  */
 global.eventEmitter = require("./globals/eventEmitter");
 global.constantMenuOptions = require("./globals/constantMenuOptions");
+global.state = require("./globals/state");
 
 /**
  * UX Flow: Show ASCII Art Title "Employees Manager", 
@@ -23,5 +29,5 @@ global.constantMenuOptions = require("./globals/constantMenuOptions");
 const asciiArtTitle = require("./views/asciiArtTitle.js");
 asciiArtTitle.displayAsciiArtTitle();
 
-const mainMenu = require("./views/cli/mainMenu");
-mainMenu.inquirer();
+const cliMainMenu = require("./views/cli/mainMenu");
+cliMainMenu.inquirer();

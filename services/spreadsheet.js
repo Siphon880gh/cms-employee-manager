@@ -42,7 +42,10 @@ module.exports = {
         const { sortBy } = context;
         const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
 
+        // Go to data access layer
         var dalViewAllDepartments = new DalViewAllDepartments({ orderBy: "DEPT" });
+
+        // Return to main menu
         dalViewAllDepartments.read(callbackToMainMenu);
     },
 
@@ -52,20 +55,26 @@ module.exports = {
         const { sortBy } = context;
         const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
 
+        // Go to data access layer
         var dalViewAllRoles = new DalViewAllRoles({ orderBy: "DEPT" });
+
+        // Return to main menu
         dalViewAllRoles.read(callbackToMainMenu);
     },
     hirerAddsEmployee: function() {
         const { eventEmitter } = global;
         const DalAddEmployee = require("../dal/DalAddEmployee");
-        console.log("Hirer adding employee");
+        console.log("Service: Hirer adding employee");
 
-        // Creating to database
-        var dalAddEmployee = new DalAddEmployee();
-        dalAddEmployee.create();
+        const cliAddEmployee = require("../views/cli/addEmployee");
+        cliAddEmployee.inquirer();
 
-        // Trigger event to go to next screen: Show updated spreadsheet
-        eventEmitter.emit(constantMenuOptions.answeredAddEmployee);
+        // // Creating to database
+        // var dalAddEmployee = new DalAddEmployee();
+        // dalAddEmployee.create();
+
+        // // Trigger event to go to next screen: Show updated spreadsheet
+        // eventEmitter.emit(constantMenuOptions.answeredAddEmployee);
     },
     hirerAddedEmployee: function() {
         const DalAddedEmployee = require("../dal/DalAddedEmployee");
