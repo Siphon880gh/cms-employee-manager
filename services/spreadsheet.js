@@ -10,7 +10,7 @@
  */
 
 const cTable = require("console.table");
-const eventEmitter = require("../globals/eventEmitter");
+// const eventEmitter = require("../globals/eventEmitter");
 
 module.exports = {
     showSpreadsheetEmployees: function(context) {
@@ -55,4 +55,23 @@ module.exports = {
         var dalViewAllRoles = new DalViewAllRoles({ orderBy: "DEPT" });
         dalViewAllRoles.read(callbackToMainMenu);
     },
+    hirerAddsEmployee: function() {
+        const { eventEmitter } = global;
+        const DalAddEmployee = require("../dal/DalAddEmployee");
+        console.log("Hirer adding employee");
+
+        // Creating to database
+        var dalAddEmployee = new DalAddEmployee();
+        dalAddEmployee.create();
+
+        // Trigger event to go to next screen: Show updated spreadsheet
+        eventEmitter.emit(constantMenuOptions.answeredAddEmployee);
+    },
+    hirerAddedEmployee: function() {
+        const DalAddedEmployee = require("../dal/DalAddedEmployee");
+        console.log("Hirer added employee");
+
+        var dalAddedEmployee = new DalAddedEmployee();
+        dalAddedEmployee.read();
+    }
 }

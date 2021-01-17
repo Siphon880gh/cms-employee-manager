@@ -19,4 +19,8 @@ const constantMenuOptions = {
     mainMenu: "Main Menu"
 }
 
+constantMenuOptions.answeredAddEmployee = "Answered " + constantMenuOptions.addEmployee;
+constantMenuOptions.answeredRemoveEmployee = "Answered " + constantMenuOptions.removeEmployee;
+
+
 module.exports = constantMenuOptions;

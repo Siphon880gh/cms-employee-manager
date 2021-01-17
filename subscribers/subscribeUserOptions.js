@@ -12,7 +12,9 @@
 const {
     showSpreadsheetEmployees,
     showSpreadsheetDepartments,
-    showSpreadsheetRoles
+    showSpreadsheetRoles,
+    hirerAddsEmployee,
+    hirerAddedEmployee
 } = require("../services/spreadsheet");
 
 module.exports = {
@@ -47,7 +49,12 @@ module.exports = {
     },
     addEmployee: () => {
         console.log("Fill information on the new employee:");
+        hirerAddsEmployee();
 
+    },
+    answeredAddEmployee: () => {
+        console.log("Showing spreadsheet of all employees with the newly created employee:");
+        hirerAddedEmployee();
     },
     removeEmployee: () => {
         console.log("Which employee do you want to remove?");

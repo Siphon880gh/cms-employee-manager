@@ -20,6 +20,7 @@ eventEmitter.on(constantMenuOptions.viewAllEmployeesByManager, subscribers.viewA
 eventEmitter.on(constantMenuOptions.viewAllDepartments, subscribers.viewAllDepartments);
 eventEmitter.on(constantMenuOptions.viewAllRoles, subscribers.viewAllRoles);
 eventEmitter.on(constantMenuOptions.addEmployee, subscribers.addEmployee);
+eventEmitter.on(constantMenuOptions.answeredAddEmployee, subscribers.answeredAddEmployee);
 eventEmitter.on(constantMenuOptions.removeEmployee, subscribers.removeEmployee);
 eventEmitter.on(constantMenuOptions.updateEmployeeRole, subscribers.updateEmployeeRole);
 eventEmitter.on(constantMenuOptions.updateEmployeeManager, subscribers.updateEmployeeManager);
