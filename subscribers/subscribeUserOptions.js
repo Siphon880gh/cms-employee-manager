@@ -9,7 +9,11 @@
  * 
  */
 
-const { showSpreadsheetEmployees } = require("../services/spreadsheet");
+const {
+    showSpreadsheetEmployees,
+    showSpreadsheetDepartments,
+    showSpreadsheetRoles
+} = require("../services/spreadsheet");
 
 module.exports = {
     viewAllEmployees: (context) => {
@@ -32,6 +36,14 @@ module.exports = {
                 showSpreadsheetEmployees();
 
         }
+    },
+    viewAllDepartments: () => {
+        console.log("Viewing all departments:");
+        showSpreadsheetDepartments();
+    },
+    viewAllRoles: () => {
+        console.log("Viewing all roles:");
+        showSpreadsheetRoles();
     },
     addEmployee: () => {
         console.log("Fill information on the new employee:");

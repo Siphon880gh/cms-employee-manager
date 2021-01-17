@@ -17,6 +17,8 @@ const subscribers = require("../subscribers/subscribeUserOptions");
 eventEmitter.on(constantMenuOptions.viewAllEmployees, subscribers.viewAllEmployees);
 eventEmitter.on(constantMenuOptions.viewAllEmployeesByDept, subscribers.viewAllEmployees);
 eventEmitter.on(constantMenuOptions.viewAllEmployeesByManager, subscribers.viewAllEmployees);
+eventEmitter.on(constantMenuOptions.viewAllDepartments, subscribers.viewAllDepartments);
+eventEmitter.on(constantMenuOptions.viewAllRoles, subscribers.viewAllRoles);
 eventEmitter.on(constantMenuOptions.addEmployee, subscribers.addEmployee);
 eventEmitter.on(constantMenuOptions.removeEmployee, subscribers.removeEmployee);
 eventEmitter.on(constantMenuOptions.updateEmployeeRole, subscribers.updateEmployeeRole);

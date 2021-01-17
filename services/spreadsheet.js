@@ -11,10 +11,10 @@
 
 const cTable = require("console.table");
 const eventEmitter = require("../globals/eventEmitter");
-const DalViewAllEmployeesBy = require("../dal/DalViewAllEmployeesBy");
 
 module.exports = {
     showSpreadsheetEmployees: function(context) {
+        const DalViewAllEmployeesBy = require("../dal/DalViewAllEmployeesBy");
         if (!context) context = {};
         const { sortBy } = context;
         // console.log("showSpreadsheetEmployees sortBy value", sortBy);
@@ -34,5 +34,25 @@ module.exports = {
                 var dalViewAllEmployeesBy = new DalViewAllEmployeesBy();
                 dalViewAllEmployeesBy.read(callbackToMainMenu);
         }
-    }
+    },
+
+    showSpreadsheetDepartments: function(context) {
+        const DalViewAllDepartments = require("../dal/DalViewAllDepartments");
+        if (!context) context = {};
+        const { sortBy } = context;
+        const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
+
+        var dalViewAllDepartments = new DalViewAllDepartments({ orderBy: "DEPT" });
+        dalViewAllDepartments.read(callbackToMainMenu);
+    },
+
+    showSpreadsheetRoles: function(context) {
+        const DalViewAllRoles = require("../dal/DalViewAllRoles");
+        if (!context) context = {};
+        const { sortBy } = context;
+        const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
+
+        var dalViewAllRoles = new DalViewAllRoles({ orderBy: "DEPT" });
+        dalViewAllRoles.read(callbackToMainMenu);
+    },
 }

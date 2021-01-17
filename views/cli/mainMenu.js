@@ -17,6 +17,8 @@ module.exports = {
                     constantMenuOptions.viewAllEmployees,
                     constantMenuOptions.viewAllEmployeesByDept,
                     constantMenuOptions.viewAllEmployeesByManager,
+                    constantMenuOptions.viewAllDepartments,
+                    constantMenuOptions.viewAllRoles,
                     constantMenuOptions.addEmployee,
                     constantMenuOptions.removeEmployee,
                     constantMenuOptions.updateEmployeeRole,
@@ -34,6 +36,12 @@ module.exports = {
                         break;
                     case constantMenuOptions.viewAllEmployeesByManager:
                         eventEmitter.emit(constantMenuOptions.viewAllEmployees, { groupBy: "MANAGER" });
+                        break;
+                    case constantMenuOptions.viewAllDepartments:
+                        eventEmitter.emit(constantMenuOptions.viewAllDepartments);
+                        break;
+                    case constantMenuOptions.viewAllRoles:
+                        eventEmitter.emit(constantMenuOptions.viewAllRoles);
                         break;
                     case constantMenuOptions.addEmployee:
                         eventEmitter.emit(constantMenuOptions.addEmployee);
