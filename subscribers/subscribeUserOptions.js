@@ -19,12 +19,12 @@ module.exports = {
         switch (groupBy) {
             case "DEPT":
                 console.log("Viewing all employees by department:");
-                showSpreadsheetDepartments();
+                showSpreadsheetEmployees({ sortBy: "DEPT" });
                 break;
 
             case "MANAGER":
                 console.log("Viewing all employees by manager:");
-                showSpreadsheetEmployees();
+                showSpreadsheetEmployees({ sortBy: "MANAGER" });
                 break;
 
             default: // null

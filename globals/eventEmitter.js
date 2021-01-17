@@ -13,7 +13,7 @@ const constantMenuOptions = require("../globals/constantMenuOptions");
  *  Note: The subscriber viewAllEmployees will handle viewing all employees, employees grouped by Department, 
  *        and employees grouped by Manager 
  */
-const subscribers = require("../subscribers/userOptions");
+const subscribers = require("../subscribers/subscribeUserOptions");
 eventEmitter.on(constantMenuOptions.viewAllEmployees, subscribers.viewAllEmployees);
 eventEmitter.on(constantMenuOptions.viewAllEmployeesByDept, subscribers.viewAllEmployees);
 eventEmitter.on(constantMenuOptions.viewAllEmployeesByManager, subscribers.viewAllEmployees);

@@ -1,36 +1,38 @@
 /**
  * @file
  * This is a service layer that provides the business logic to show "spreadsheet" 
- * of employees, etc that the user chooses from the main menu or a submenu
+ * and other "spreadsheet manipulations" to the business user.
  * 
  * To keep separation of concerns, this business logic is not aware of Database
- * implementations. Those are in a database access layer at models/.
+ * implementations. Database implementations are at the data access layer (DAL). 
+ * The business side will call the data access layer to get database information.
  * 
  */
 
-/** Business logic requires that the user sees a spreadsheet of employees */
 const cTable = require("console.table");
 const eventEmitter = require("../globals/eventEmitter");
-
-// const employees = require("../models/employees");
+const DalViewAllEmployeesBy = require("../dal/DalViewAllEmployeesBy");
 
 module.exports = {
-    showSpreadsheetEmployees: (context) => {
+    showSpreadsheetEmployees: function(context) {
         if (!context) context = {};
-        const { groupBy } = context;
+        const { sortBy } = context;
+        // console.log("showSpreadsheetEmployees sortBy value", sortBy);
+        // process.exit(0);
+        const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
 
-        switch (groupBy) {
+        switch (sortBy) {
             case "DEPT":
-                console.log("Servicing employee spreadsheet grouped by department:");
-                global.eventEmitter.emit("Main Menu");
+                var dalViewAllEmployeesBy = new DalViewAllEmployeesBy({ orderBy: "DEPT" });
+                dalViewAllEmployeesBy.read(callbackToMainMenu);
                 break;
             case "MANAGER":
-                console.log("Servicing employee spreadsheet grouped by manager:");
-                global.eventEmitter.emit("Main Menu");
+                var dalViewAllEmployeesBy = new DalViewAllEmployeesBy({ orderBy: "MANAGER" });
+                dalViewAllEmployeesBy.read(callbackToMainMenu);
                 break;
             default:
-                console.log("Servicing employee spreadsheet:");
-                global.eventEmitter.emit("Main Menu");
+                var dalViewAllEmployeesBy = new DalViewAllEmployeesBy();
+                dalViewAllEmployeesBy.read(callbackToMainMenu);
         }
     }
 }

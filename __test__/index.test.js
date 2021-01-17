@@ -1,7 +1,6 @@
 const process = require("process");
 const inquirer = require("inquirer");
 const mysql2 = require("mysql2");
-
 const fs = require('fs');
 
 /** Testing env file. That file may not exist on other copies 
