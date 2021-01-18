@@ -3,9 +3,9 @@
  * Main Menu that lets user choose how to manage the employees.
  * 
  * Architecture Note:
- * For listing the employees and managers, we will break the pattern 
- * of going from service to data access layer because of limited
- * time available for coding. May refactor in the future.
+ * We will break the pattern of going from service to data access 
+ * layer because of limited time available for coding. May refactor
+ * in the future. This is at listing the employees and managers.
  * 
  */
 
