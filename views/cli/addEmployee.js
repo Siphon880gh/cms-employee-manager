@@ -5,7 +5,7 @@
  * Architecture Note:
  * For listing the employees and managers, we will break the pattern 
  * of going from service to data access layer because of limited
- * time available for development. May refactor in the future.
+ * time available for coding. May refactor in the future.
  * 
  */
 
@@ -55,9 +55,27 @@ module.exports = {
                     var roleChoices = res.map(TextRow => `${TextRow.id}. ${TextRow.title}`);
                     questionObjs[2].choices = roleChoices;
                     connRole.end();
+                });
+            });
+
+            // Prepare manager choices
+            const dbManager = new Db();
+            const connManager = dbManager.getConnection();
+            connManager.connect(err => {
+                if (err) throw err;
+
+                connManager.query("SELECT id, CONCAT(first_name, ' ', last_name) AS name FROM employee", (err, res) => {
+                    if (err) throw err;
+                    // console.log("ALL ROLES VAL", res);
+
+                    var roleChoices = res.map(TextRow => `${TextRow.id}. ${TextRow.name}`);
+                    questionObjs[3].choices = roleChoices;
+                    connManager.end();
 
                 });
             });
+
+            //"2. Lead Engineer".split(".")[0]
 
             inquirer.prompt(questionObjs).then(answers => {
                     global.state = { answers: answers };
