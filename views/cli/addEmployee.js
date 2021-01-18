@@ -75,9 +75,25 @@ module.exports = {
                 });
             });
 
-            //"2. Lead Engineer".split(".")[0]
 
             inquirer.prompt(questionObjs).then(answers => {
+
+                    /**
+                     * At this point, example answer value:
+                     *   answers: {
+                     *      firstName: 'John',
+                     *      lastName: 'Doe',
+                     *      role: '2. Lead Engineer',
+                     *      manager: '5. Malia Brown'
+                     *   }
+                    /** So parse for the role and manager ID  */
+
+                    answers.role = answers.role.split(".")[0];
+                    answers.role = parseInt(answers.role);
+
+                    answers.manager = answers.manager.split(".")[0];
+                    answers.manager = parseInt(answers.manager);
+
                     global.state = { answers: answers };
                 })
                 .catch(err => {
