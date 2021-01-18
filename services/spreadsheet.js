@@ -66,8 +66,22 @@ module.exports = {
         const DalAddEmployee = require("../dal/DalAddEmployee");
         console.log("Service: Hirer adding employee");
 
+        // Force Inquirer to give us the answer values outside of Inquirer with a global state
+        global.state = {};
         const cliAddEmployee = require("../views/cli/addEmployee");
         cliAddEmployee.inquirer();
+
+        // Check until global.state is filled with answers
+        var tempWaitInquirer = setInterval(function() {
+            if (Object.keys(global.state).length) {
+                console.log("Service: global state add employee answers", global.state);
+                clearInterval(tempWaitInquirer);
+
+                // TODO:
+
+            }
+        }, 100);
+
 
         // // Creating to database
         // var dalAddEmployee = new DalAddEmployee();
