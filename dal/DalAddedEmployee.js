@@ -1,8 +1,7 @@
 /**
  * @file
  * 
- * Data access layer that shows all roles joining with department table so that department fields 
- * have names instead of Id's.
+ * Data access layer that adds a new employee record from inquirer answers
  * 
  */
 

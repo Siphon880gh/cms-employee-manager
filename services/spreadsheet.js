@@ -108,12 +108,44 @@ module.exports = {
             }
         }, 100);
 
-    },
+    }, // hirerRemoveEmployee
     hirerRemovedEmployee: function(deletableEmployeeId) {
         const DalRemovedEmployee = require("../dal/DalRemovedEmployee");
-        console.log("Service: Hirer removed employee", deletableEmployeeId);
+        // console.log("Service: Hirer removed employee", deletableEmployeeId);
 
         var dalRemovedEmployee = new DalRemovedEmployee(deletableEmployeeId);
         dalRemovedEmployee.deleteThenRead(callbackToMainMenu);
-    }
+    },
+    hirerUpdateEmployeeRole: function() {
+        const { eventEmitter } = global;
+
+        // Force Inquirer to give us the answer values outside of Inquirer with a global state
+        global.state = {};
+        const cliUpdateEmployeeRole = require("../views/cli/updateEmployeeRole");
+        cliUpdateEmployeeRole.inquirer();
+
+        // Check until global.state is filled with answers
+        var tempWaitInquirer = setInterval(function() {
+            if (Object.keys(global.state).length) {
+                // console.log("Service: global state add employee answers", global.state);
+                clearInterval(tempWaitInquirer);
+
+                // console.log("Service: Global State value: ", global.state);
+                // throw "";
+
+                // We have the global.state filled with Remove Employee information. Lets get it to the database and show the updated database:
+                const inquirerAnswerWrappingUpdatableEmployeeIdAndNewRoleId = global.state;
+                eventEmitter.emit(constantMenuOptions.answeredUpdateEmployeeRole, inquirerAnswerWrappingUpdatableEmployeeIdAndNewRoleId);
+            }
+        }, 100);
+    }, // hirerUpdateEmployeeRole
+    hirerUpdatedEmployeeRole: function(updatableEmployeeId, newRoleId) {
+        const DalUpdatedEmployeeRole = require("../dal/DalUpdatedEmployeeRole.js");
+        // console.log("Service: Hirer updated employee role", updatableEmployeeId);
+
+        // console.log("Subscriber: updatableEmployeeId and newRoleId value before updating database:", updatableEmployeeId, newRoleId);
+        // throw "";
+        var dalUpdatedEmployeeRole = new DalUpdatedEmployeeRole(updatableEmployeeId, newRoleId);
+        dalUpdatedEmployeeRole.deleteThenRead(callbackToMainMenu);
+    },
 }

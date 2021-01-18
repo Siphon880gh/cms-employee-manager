@@ -24,6 +24,7 @@ eventEmitter.on(constantMenuOptions.answeredAddEmployee, subscribers.answeredAdd
 eventEmitter.on(constantMenuOptions.removeEmployee, subscribers.removeEmployee);
 eventEmitter.on(constantMenuOptions.answeredRemoveEmployee, subscribers.answeredRemoveEmployee);
 eventEmitter.on(constantMenuOptions.updateEmployeeRole, subscribers.updateEmployeeRole);
+eventEmitter.on(constantMenuOptions.answeredUpdateEmployeeRole, subscribers.answeredUpdateEmployeeRole);
 eventEmitter.on(constantMenuOptions.updateEmployeeManager, subscribers.updateEmployeeManager);
 eventEmitter.on(constantMenuOptions.exit, subscribers.exit);
 eventEmitter.on(constantMenuOptions.mainMenu, returnToMainMenu);

@@ -1,7 +1,7 @@
 /**
  * @file
  * 
- * Data access layer that drops a record based on employee Id
+ * Data access layer that updates the selected employee id's role id to new role id
  * 
  */
 
@@ -10,8 +10,9 @@ const fs = require("fs");
 const Db = require("./Db");
 
 module.exports = class DalRemovedEmployee {
-        constructor(deletableEmployeeId) {
-            this.deletableEmployeeId = deletableEmployeeId;
+        constructor(updatableEmployeeId, newRoleId) {
+            this.updatableEmployeeId = updatableEmployeeId;
+            this.newRoleId = newRoleId;
         }
         deleteThenRead(callback) {
                 // Insert new employee record
@@ -24,8 +25,7 @@ module.exports = class DalRemovedEmployee {
                     // throw "";
 
                     /** Delete from Employee table  */
-                    conn.query("DELETE FROM employee WHERE id = ?",
-                        this.deletableEmployeeId,
+                    conn.query("UPDATE employee SET role_id=? WHERE id=?", [this.newRoleId, this.updatableEmployeeId],
                         (err, res) => {
                             if (err) throw err;
 

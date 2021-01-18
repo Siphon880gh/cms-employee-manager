@@ -7,6 +7,9 @@
  * 
  * For options that require additional input, we will call additional views (views/cli).
  * 
+ * Generally the flow is like this:
+ * CLI View -> Subscribers -> Service -> Data Access Layer -> Service -> CLI View
+ * 
  */
 
 const {
@@ -16,7 +19,9 @@ const {
     hirerAddsEmployee,
     hirerAddedEmployee,
     hirerRemoveEmployee,
-    hirerRemovedEmployee
+    hirerRemovedEmployee,
+    hirerUpdateEmployeeRole,
+    hirerUpdatedEmployeeRole
 } = require("../services/spreadsheet");
 
 module.exports = {
@@ -60,19 +65,23 @@ module.exports = {
         hirerAddedEmployee(newEmployeeObj);
     },
     removeEmployee: () => {
-        console.log("Which employee do you want to remove?");
+        // console.log("Which employee do you want to remove?");
         hirerRemoveEmployee();
 
     },
     answeredRemoveEmployee: (inquirerAnswerWrappingDeletableEmployeeId) => {
         const { deletableEmployeeId } = inquirerAnswerWrappingDeletableEmployeeId;
-        console.log("Which employee do you want to remove?");
         hirerRemovedEmployee(deletableEmployeeId);
 
     },
     updateEmployeeRole: () => {
-        console.log("Which employee's role do you want to update?");
+        // console.log("Which employee's role do you want to update?");
+        hirerUpdateEmployeeRole();
 
+    },
+    answeredUpdateEmployeeRole: (inquirerAnswerWrappingUpdatableEmployeeIdAndNewRoleId) => {
+        const { updatableEmployeeId, newRoleId } = inquirerAnswerWrappingUpdatableEmployeeIdAndNewRoleId;
+        hirerUpdatedEmployeeRole(updatableEmployeeId, newRoleId);
     },
     updateEmployeeManager: () => {
         console.log("Which employee's manager do you want to update?");

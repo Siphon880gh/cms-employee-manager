@@ -21,6 +21,6 @@ const constantMenuOptions = {
 
 constantMenuOptions.answeredAddEmployee = "Answered " + constantMenuOptions.addEmployee;
 constantMenuOptions.answeredRemoveEmployee = "Answered " + constantMenuOptions.removeEmployee;
-
+constantMenuOptions.answeredUpdateEmployeeRole = "Answered " + constantMenuOptions.updateEmployeeRole;
 
 module.exports = constantMenuOptions;
