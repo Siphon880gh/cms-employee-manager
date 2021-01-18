@@ -54,6 +54,8 @@ module.exports = class DalAddedEmployee {
                         const strTable = cTable.getTable(res);
                         console.log(strTable);
                         connS.end();
+
+                        if (callback) callback();
                     });
             }); // connect
         } // createThenRead

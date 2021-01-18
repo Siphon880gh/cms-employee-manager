@@ -10,7 +10,7 @@
  */
 
 const cTable = require("console.table");
-// const eventEmitter = require("../globals/eventEmitter");
+const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
 
 module.exports = {
     showSpreadsheetEmployees: function(context) {
@@ -19,7 +19,6 @@ module.exports = {
         const { sortBy } = context;
         // console.log("showSpreadsheetEmployees sortBy value", sortBy);
         // process.exit(0);
-        const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
 
         switch (sortBy) {
             case "DEPT":
@@ -40,7 +39,6 @@ module.exports = {
         const DalViewAllDepartments = require("../dal/DalViewAllDepartments");
         if (!context) context = {};
         const { sortBy } = context;
-        const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
 
         // Go to data access layer
         var dalViewAllDepartments = new DalViewAllDepartments({ orderBy: "DEPT" });
@@ -53,7 +51,6 @@ module.exports = {
         const DalViewAllRoles = require("../dal/DalViewAllRoles");
         if (!context) context = {};
         const { sortBy } = context;
-        const callbackToMainMenu = () => { global.eventEmitter.emit("Main Menu"); }
 
         // Go to data access layer
         var dalViewAllRoles = new DalViewAllRoles({ orderBy: "DEPT" });
@@ -93,6 +90,6 @@ module.exports = {
         // console.log("Service: Hirer added employee", newEmployeeObj);
 
         var dalAddedEmployee = new DalAddedEmployee(newEmployeeObj);
-        dalAddedEmployee.createThenRead();
+        dalAddedEmployee.createThenRead(callbackToMainMenu);
     }
 }
