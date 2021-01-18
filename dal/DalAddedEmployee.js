@@ -43,7 +43,7 @@ module.exports = class DalAddedEmployee {
 
             // Select all employees to display
             const dbS = new Db();
-            const connS = db.getConnection();
+            const connS = dbS.getConnection();
             connS.connect(err => {
                 if (err) throw err;
 
