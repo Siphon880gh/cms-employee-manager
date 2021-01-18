@@ -63,8 +63,6 @@ module.exports = {
     },
     hirerAddsEmployee: function() {
         const { eventEmitter } = global;
-        const DalAddEmployee = require("../dal/DalAddEmployee");
-        console.log("Service: Hirer adding employee");
 
         // Force Inquirer to give us the answer values outside of Inquirer with a global state
         global.state = {};
@@ -74,11 +72,11 @@ module.exports = {
         // Check until global.state is filled with answers
         var tempWaitInquirer = setInterval(function() {
             if (Object.keys(global.state).length) {
-                console.log("Service: global state add employee answers", global.state);
+                // console.log("Service: global state add employee answers", global.state);
                 clearInterval(tempWaitInquirer);
 
-                // TODO:
-
+                // We have the global.state filled with Add Employee information. Lets get it to the database and show the new database:
+                eventEmitter.emit(constantMenuOptions.answeredAddEmployee, global.state.answers);
             }
         }, 100);
 
@@ -90,11 +88,11 @@ module.exports = {
         // // Trigger event to go to next screen: Show updated spreadsheet
         // eventEmitter.emit(constantMenuOptions.answeredAddEmployee);
     },
-    hirerAddedEmployee: function() {
+    hirerAddedEmployee: function(newEmployeeObj) {
         const DalAddedEmployee = require("../dal/DalAddedEmployee");
-        console.log("Hirer added employee");
+        // console.log("Service: Hirer added employee", newEmployeeObj);
 
-        var dalAddedEmployee = new DalAddedEmployee();
-        dalAddedEmployee.read();
+        var dalAddedEmployee = new DalAddedEmployee(newEmployeeObj);
+        dalAddedEmployee.createThenRead();
     }
 }

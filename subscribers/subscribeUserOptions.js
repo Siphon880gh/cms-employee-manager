@@ -48,13 +48,14 @@ module.exports = {
         showSpreadsheetRoles();
     },
     addEmployee: () => {
-        console.log("Subscriber: Fill information on the new employee:");
+        // console.log("Subscriber: Fill information on the new employee:");
         hirerAddsEmployee();
 
     },
-    answeredAddEmployee: () => {
-        console.log("Subscriber: Showing spreadsheet of all employees with the newly created employee:");
-        hirerAddedEmployee();
+    answeredAddEmployee: (newEmployeeObj) => {
+        // console.log("Subscriber: Showing spreadsheet of all employees with the newly created employee:");
+        // console.log(newEmployeeObj);
+        hirerAddedEmployee(newEmployeeObj);
     },
     removeEmployee: () => {
         console.log("Which employee do you want to remove?");
