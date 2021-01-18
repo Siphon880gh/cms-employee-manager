@@ -20,6 +20,7 @@ module.exports = {
                     constantMenuOptions.viewAllDepartments,
                     constantMenuOptions.addDepartment,
                     constantMenuOptions.viewAllRoles,
+                    constantMenuOptions.addRole,
                     constantMenuOptions.addEmployee,
                     constantMenuOptions.removeEmployee,
                     constantMenuOptions.updateEmployeeRole,
@@ -46,6 +47,9 @@ module.exports = {
                         break;
                     case constantMenuOptions.viewAllRoles:
                         eventEmitter.emit(constantMenuOptions.viewAllRoles);
+                        break;
+                    case constantMenuOptions.addRole:
+                        eventEmitter.emit(constantMenuOptions.addRole);
                         break;
                     case constantMenuOptions.addEmployee:
                         eventEmitter.emit(constantMenuOptions.addEmployee);

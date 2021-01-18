@@ -13,6 +13,7 @@ const constantMenuOptions = {
     viewAllDepartments: "View All Departments",
     addDepartment: "Add Department",
     viewAllRoles: "View All Roles",
+    addRole: "Add Role",
     addEmployee: "Add Employee",
     removeEmployee: "Remove Employee",
     updateEmployeeRole: "Update Employee Role",
@@ -21,8 +22,11 @@ const constantMenuOptions = {
     mainMenu: "Main Menu"
 }
 
-/** Constants for Secondary Menu Inquirer custom events and event handlers */
+/** Constants for Secondary Menu Inquirer custom events and event handlers. 
+ *  The string concatenation is make sure the values are different from the main menu constants
+ */
 constantMenuOptions.answeredAddDepartment = "Answered " + constantMenuOptions.addDepartment;
+constantMenuOptions.answeredAddRole = "Answered " + constantMenuOptions.addRole;
 constantMenuOptions.answeredAddEmployee = "Answered " + constantMenuOptions.addEmployee;
 constantMenuOptions.answeredRemoveEmployee = "Answered " + constantMenuOptions.removeEmployee;
 constantMenuOptions.answeredUpdateEmployeeRole = "Answered " + constantMenuOptions.updateEmployeeRole;

@@ -88,6 +88,36 @@ module.exports = {
         // Return to main menu
         dalViewAllRoles.read(callbackToMainMenu);
     },
+    hrAddRole: function() {
+        const { eventEmitter } = global;
+
+        // Force Inquirer to give us the answer values outside of Inquirer with a global state
+        global.state = {};
+        const cliAddRole = require("../views/cli/addRole");
+        cliAddRole.inquirer();
+
+        // Check until global.state is filled with answers
+        var tempWaitInquirer = setInterval(function() {
+            if (Object.keys(global.state).length) {
+                // console.log("Service: global state add role answer", global.state);
+                clearInterval(tempWaitInquirer);
+
+                // We have the global.state filled with Add Role information. Lets get it to the database and show the new database:
+                eventEmitter.emit(constantMenuOptions.answeredAddRole, global.state.answers);
+            }
+        }, 100);
+
+    },
+    hrAddedRole: function(newRoleObj) {
+        const DalAddedRole = require("../dal/DalAddedRole");
+
+        // console.log("Service: New role object before inserting to Role table", newRoleObj);
+        // throw "";
+        var dalAddedRole = new DalAddedRole(newRoleObj);
+        dalAddedRole.createThenRead(callbackToMainMenu);
+    },
+
+
     hirerAddsEmployee: function() {
         const { eventEmitter } = global;
 

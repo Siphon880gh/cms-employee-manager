@@ -25,7 +25,9 @@ const {
     hirerUpdateEmployeeManager,
     hirerUpdatedEmployeeManager,
     hrAddDepartment,
-    hrAddedDepartment
+    hrAddedDepartment,
+    hrAddRole,
+    hrAddedRole
 } = require("../services/spreadsheet");
 
 module.exports = {
@@ -60,14 +62,20 @@ module.exports = {
         // console.log("Subscriber: Fill information on the new department:");
         hrAddDepartment();
     },
-    answeredAddDepartment: (newDepartmentObj) => {
-        hrAddedDepartment(newDepartmentObj);
+    answeredAddDepartment: (newDepartmentName) => {
+        hrAddedDepartment(newDepartmentName);
     },
 
 
     viewAllRoles: () => {
-        console.log("Viewing all roles:");
         showSpreadsheetRoles();
+    },
+    addRole: () => {
+        // console.log("Subscriber: Fill information on the new role:");
+        hrAddRole();
+    },
+    answeredAddRole: (newRoleObj) => {
+        hrAddedRole(newRoleObj);
     },
 
 

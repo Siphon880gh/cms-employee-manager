@@ -24,6 +24,7 @@ module.exports = class DalViewAllRoles {
                     const mysqlJoinErrorHandler = (err, res) => {
                         if (err) throw err;
                         const strTable = cTable.getTable(res);
+                        console.log("Viewing all roles:");
                         console.log(strTable);
                         conn.end();
 

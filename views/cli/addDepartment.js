@@ -16,9 +16,8 @@ module.exports = {
                 message: "What is the new department's name?"
             }];
 
+            // Save answers to global state. The services/spreadsheet.js is watching the global state to return from inquirer.
             inquirer.prompt(questionObjs).then(answers => {
-
-                    // Save answers to global state. The services/spreadsheet.js is watching the global state to return from inquirer.
                     global.state = { answers };
                 })
                 .catch(err => {
