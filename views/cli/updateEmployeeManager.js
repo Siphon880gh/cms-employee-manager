@@ -18,13 +18,13 @@ module.exports = {
 
             let questionObjs = [{
                     name: "updatableEmployeeId",
-                    message: "Which employee's role do you want to update?",
+                    message: "Which employee's manager do you want to update?",
                     type: "list",
                     choices: []
                 },
                 {
-                    name: "newRoleId",
-                    message: "Which role do you want to set for the selected employee?",
+                    name: "newManagerId",
+                    message: "Which manager do you want to set for the selected employee?",
                     type: "list",
                     choices: []
                 }
@@ -51,21 +51,23 @@ module.exports = {
                     connEmp.end();
 
 
-                    // Prepare role choices
-                    const dbR = new Db();
-                    const connR = dbR.getConnection();
-                    connR.connect(err => {
+                    // Prepare manager choices
+                    // Note: Select ALL employees because potentially everyone can be a manager or be promoted to become a manager
+                    // Note: An employee can have the same manager as himself/herself. That'd indicate he/she is the CEO, versus employees who don't have managers assigned yet.
+                    const dbM = new Db();
+                    const connM = dbM.getConnection();
+                    connM.connect(err => {
                         if (err) throw err;
 
-                        connR.query("SELECT id, title FROM role", (err, res) => {
+                        connM.query("SELECT id, CONCAT(first_name, ' ', last_name) AS name FROM employee", (err, res) => {
                             var reChoices = res.map(TextRow => {
                                 return {
-                                    name: TextRow.title,
+                                    name: TextRow.name,
                                     value: parseInt(TextRow.id)
                                 }
                             });
                             questionObjs[1].choices = reChoices;
-                            connR.end();
+                            connM.end();
                         });
                     });
 

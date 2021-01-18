@@ -21,7 +21,9 @@ const {
     hirerRemoveEmployee,
     hirerRemovedEmployee,
     hirerUpdateEmployeeRole,
-    hirerUpdatedEmployeeRole
+    hirerUpdatedEmployeeRole,
+    hirerUpdateEmployeeManager,
+    hirerUpdatedEmployeeManager
 } = require("../services/spreadsheet");
 
 module.exports = {
@@ -54,6 +56,8 @@ module.exports = {
         console.log("Viewing all roles:");
         showSpreadsheetRoles();
     },
+
+
     addEmployee: () => {
         // console.log("Subscriber: Fill information on the new employee:");
         hirerAddsEmployee();
@@ -64,6 +68,8 @@ module.exports = {
         // console.log(newEmployeeObj);
         hirerAddedEmployee(newEmployeeObj);
     },
+
+
     removeEmployee: () => {
         // console.log("Which employee do you want to remove?");
         hirerRemoveEmployee();
@@ -74,6 +80,8 @@ module.exports = {
         hirerRemovedEmployee(deletableEmployeeId);
 
     },
+
+
     updateEmployeeRole: () => {
         // console.log("Which employee's role do you want to update?");
         hirerUpdateEmployeeRole();
@@ -83,10 +91,19 @@ module.exports = {
         const { updatableEmployeeId, newRoleId } = inquirerAnswerWrappingUpdatableEmployeeIdAndNewRoleId;
         hirerUpdatedEmployeeRole(updatableEmployeeId, newRoleId);
     },
+
+
     updateEmployeeManager: () => {
-        console.log("Which employee's manager do you want to update?");
+        // console.log("Which employee's manager do you want to update?");
+        hirerUpdateEmployeeManager();
 
     },
+    answeredUpdateEmployeeManager: (inquirerAnswerWrappingUpdatableEmployeeIdAndNewManagerId) => {
+        const { updatableEmployeeId, newManagerId } = inquirerAnswerWrappingUpdatableEmployeeIdAndNewManagerId;
+        hirerUpdatedEmployeeManager(updatableEmployeeId, newManagerId);
+    },
+
+
     exit: () => {
         console.log("\nThank you for using Employee Manager.");
         process.exit(0)

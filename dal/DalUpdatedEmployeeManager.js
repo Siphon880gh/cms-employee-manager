@@ -1,7 +1,7 @@
 /**
  * @file
  * 
- * Data access layer that updates the selected employee's role id to new role id
+ * Data access layer that updates the selected employee's manager id to new manager id
  * 
  */
 
@@ -10,9 +10,9 @@ const fs = require("fs");
 const Db = require("./Db");
 
 module.exports = class DalUpdatedEmployeeRole {
-        constructor(updatableEmployeeId, newRoleId) {
+        constructor(updatableEmployeeId, newManagereId) {
             this.updatableEmployeeId = updatableEmployeeId;
-            this.newRoleId = newRoleId;
+            this.newManagereId = newManagereId;
         }
         updateThenRead(callback) {
                 /** Update employee record */
@@ -24,7 +24,7 @@ module.exports = class DalUpdatedEmployeeRole {
                     // console.log("DAL: Removed Employee deletableEmployeeId", this.deletableEmployeeId);
                     // throw "";
 
-                    conn.query("UPDATE employee SET role_id=? WHERE id=?", [this.newRoleId, this.updatableEmployeeId],
+                    conn.query("UPDATE employee SET manager_id=? WHERE id=?", [this.newManagereId, this.updatableEmployeeId],
                         (err, res) => {
                             if (err) throw err;
 
@@ -39,7 +39,7 @@ module.exports = class DalUpdatedEmployeeRole {
                                 connS.query(sqlViewAllEmployeesById,
                                     (err, res) => {
                                         if (err) throw err;
-                                        console.log("Employee's role updated. Updated spreadsheet is as follows:")
+                                        console.log("Employee's manager updated. Updated spreadsheet is as follows:")
                                         const strTable = cTable.getTable(res);
                                         console.log(strTable);
                                         connS.end();
