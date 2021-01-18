@@ -14,7 +14,9 @@ const {
     showSpreadsheetDepartments,
     showSpreadsheetRoles,
     hirerAddsEmployee,
-    hirerAddedEmployee
+    hirerAddedEmployee,
+    hirerRemoveEmployee,
+    hirerRemovedEmployee
 } = require("../services/spreadsheet");
 
 module.exports = {
@@ -59,6 +61,13 @@ module.exports = {
     },
     removeEmployee: () => {
         console.log("Which employee do you want to remove?");
+        hirerRemoveEmployee();
+
+    },
+    answeredRemoveEmployee: (inquirerAnswerWrappingDeletableEmployeeId) => {
+        const { deletableEmployeeId } = inquirerAnswerWrappingDeletableEmployeeId;
+        console.log("Which employee do you want to remove?");
+        hirerRemovedEmployee(deletableEmployeeId);
 
     },
     updateEmployeeRole: () => {

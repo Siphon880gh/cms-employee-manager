@@ -1,6 +1,6 @@
 /**
  * @file
- * Main Menu that lets user choose how to manage the employees.
+ * Inquirer CLI for inputting fields to new employee
  * 
  * Architecture Note:
  * We will break the pattern of going from service to data access 
@@ -84,17 +84,18 @@ module.exports = {
                     questionObjs[3].choices = managerChoices;
                     connManager.end();
 
-                });
-            });
+                    inquirer.prompt(questionObjs).then(answers => {
 
-            inquirer.prompt(questionObjs).then(answers => {
+                            // Save answers to global state. The services/spreadsheet.js is watching the global state to return from inquirer.
+                            global.state = { answers };
+                        })
+                        .catch(err => {
+                            console.log("Error: ", err);
+                        })
 
-                    // Save answers to global state. The services/spreadsheet.js is watching the global state to return from inquirer.
-                    global.state = { answers: answers };
-                })
-                .catch(err => {
-                    console.log("Error: ", err);
-                })
+                }); // query
+            }); // connect
+
 
         } // inquirer
 }

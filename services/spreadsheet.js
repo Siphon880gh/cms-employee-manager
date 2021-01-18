@@ -84,5 +84,36 @@ module.exports = {
 
         var dalAddedEmployee = new DalAddedEmployee(newEmployeeObj);
         dalAddedEmployee.createThenRead(callbackToMainMenu);
+    },
+    hirerRemoveEmployee: function() {
+        const { eventEmitter } = global;
+
+        // Force Inquirer to give us the answer values outside of Inquirer with a global state
+        global.state = {};
+        const cliRemoveEmployee = require("../views/cli/removeEmployee");
+        cliRemoveEmployee.inquirer();
+
+        // Check until global.state is filled with answers
+        var tempWaitInquirer = setInterval(function() {
+            if (Object.keys(global.state).length) {
+                // console.log("Service: global state add employee answers", global.state);
+                clearInterval(tempWaitInquirer);
+
+                // console.log("Service: GLOBAL STATE VAL: ", global.state);
+                // throw "";
+
+                // We have the global.state filled with Remove Employee information. Lets get it to the database and show the updated database:
+                const inquirerAnswerWrappingDeletableEmployeeId = global.state;
+                eventEmitter.emit(constantMenuOptions.answeredRemoveEmployee, inquirerAnswerWrappingDeletableEmployeeId);
+            }
+        }, 100);
+
+    },
+    hirerRemovedEmployee: function(deletableEmployeeId) {
+        const DalRemovedEmployee = require("../dal/DalRemovedEmployee");
+        console.log("Service: Hirer removed employee", deletableEmployeeId);
+
+        var dalRemovedEmployee = new DalRemovedEmployee(deletableEmployeeId);
+        dalRemovedEmployee.deleteThenRead(callbackToMainMenu);
     }
 }
