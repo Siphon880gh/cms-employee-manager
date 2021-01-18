@@ -8,7 +8,7 @@ By Weng Fei Fung. CMS Employee Manager is an internal tool for HR departments to
 
 Screenshot
 ---
-Watch [Youtube Demo](https://www.youtube.com/watch?v=usctjhJGZ)
+Watch [Youtube Demo](https://www.youtube.com/watch?v=skMjZjo3edM)
 
 Table of Contents
 ---
