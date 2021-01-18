@@ -5,11 +5,13 @@
  * 
  * */
 
+/** Constants for Main Menu Inquirer choices, custom events, and event handlers */
 const constantMenuOptions = {
     viewAllEmployees: "View All Employees",
     viewAllEmployeesByDept: "View All Employees Sorted By Department",
     viewAllEmployeesByManager: "View All Employees Sorted By Manager",
     viewAllDepartments: "View All Departments",
+    addDepartment: "Add Department",
     viewAllRoles: "View All Roles",
     addEmployee: "Add Employee",
     removeEmployee: "Remove Employee",
@@ -19,6 +21,8 @@ const constantMenuOptions = {
     mainMenu: "Main Menu"
 }
 
+/** Constants for Secondary Menu Inquirer custom events and event handlers */
+constantMenuOptions.answeredAddDepartment = "Answered " + constantMenuOptions.addDepartment;
 constantMenuOptions.answeredAddEmployee = "Answered " + constantMenuOptions.addEmployee;
 constantMenuOptions.answeredRemoveEmployee = "Answered " + constantMenuOptions.removeEmployee;
 constantMenuOptions.answeredUpdateEmployeeRole = "Answered " + constantMenuOptions.updateEmployeeRole;

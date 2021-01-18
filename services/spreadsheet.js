@@ -47,6 +47,36 @@ module.exports = {
         dalViewAllDepartments.read(callbackToMainMenu);
     },
 
+    hrAddDepartment: function() {
+        const { eventEmitter } = global;
+
+        // Force Inquirer to give us the answer values outside of Inquirer with a global state
+        global.state = {};
+        const cliAddDepartment = require("../views/cli/addDepartment");
+        cliAddDepartment.inquirer();
+
+        // Check until global.state is filled with answers
+        var tempWaitInquirer = setInterval(function() {
+            if (Object.keys(global.state).length) {
+                // console.log("Service: global state add department answer", global.state);
+                clearInterval(tempWaitInquirer);
+
+                // We have the global.state filled with Add Department information. Lets get it to the database and show the new database:
+                const { newDepartmentName } = global.state.answers;
+                eventEmitter.emit(constantMenuOptions.answeredAddDepartment, newDepartmentName);
+            }
+        }, 100);
+
+    },
+    hrAddedDepartment: function(newDepartmentName) {
+        const DalAddedDepartment = require("../dal/DalAddedDepartment");
+        // console.log("Service: HR added department", newDepartmentName);
+
+        var dalAddedDepartment = new DalAddedDepartment(newDepartmentName);
+        dalAddedDepartment.createThenRead(callbackToMainMenu);
+    },
+
+
     showSpreadsheetRoles: function(context) {
         const DalViewAllRoles = require("../dal/DalViewAllRoles");
         if (!context) context = {};

@@ -21,6 +21,10 @@ eventEmitter.on(constantMenuOptions.viewAllEmployees, subscribers.viewAllEmploye
 eventEmitter.on(constantMenuOptions.viewAllEmployeesByDept, subscribers.viewAllEmployees);
 eventEmitter.on(constantMenuOptions.viewAllEmployeesByManager, subscribers.viewAllEmployees);
 eventEmitter.on(constantMenuOptions.viewAllDepartments, subscribers.viewAllDepartments);
+
+eventEmitter.on(constantMenuOptions.addDepartment, subscribers.addDepartment);
+eventEmitter.on(constantMenuOptions.answeredAddDepartment, subscribers.answeredAddDepartment);
+
 eventEmitter.on(constantMenuOptions.viewAllRoles, subscribers.viewAllRoles);
 
 eventEmitter.on(constantMenuOptions.addEmployee, subscribers.addEmployee);
