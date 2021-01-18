@@ -52,7 +52,13 @@ module.exports = {
                     if (err) throw err;
                     // console.log("ALL ROLES VAL", res);
 
-                    var roleChoices = res.map(TextRow => `${TextRow.id}. ${TextRow.title}`);
+                    // Inquirer list can have different values (role id) than what is displayed (role name)
+                    var roleChoices = res.map(TextRow => {
+                        return {
+                            name: TextRow.title,
+                            value: parseInt(TextRow.id)
+                        }
+                    });
                     questionObjs[2].choices = roleChoices;
                     connRole.end();
                 });
@@ -68,32 +74,22 @@ module.exports = {
                     if (err) throw err;
                     // console.log("ALL ROLES VAL", res);
 
-                    var roleChoices = res.map(TextRow => `${TextRow.id}. ${TextRow.name}`);
-                    questionObjs[3].choices = roleChoices;
+                    // Inquirer list can have different values (manager id) than what is displayed (manager name)
+                    var managerChoices = res.map(TextRow => {
+                        return {
+                            name: TextRow.name,
+                            value: parseInt(TextRow.id)
+                        }
+                    });
+                    questionObjs[3].choices = managerChoices;
                     connManager.end();
 
                 });
             });
 
-
             inquirer.prompt(questionObjs).then(answers => {
 
-                    /**
-                     * At this point, example answer value:
-                     *   answers: {
-                     *      firstName: 'John',
-                     *      lastName: 'Doe',
-                     *      role: '2. Lead Engineer',
-                     *      manager: '5. Malia Brown'
-                     *   }
-                    /** So parse for the role and manager ID  */
-
-                    answers.role = answers.role.split(".")[0];
-                    answers.role = parseInt(answers.role);
-
-                    answers.manager = answers.manager.split(".")[0];
-                    answers.manager = parseInt(answers.manager);
-
+                    // Save answers to global state. The services/spreadsheet.js is watching the global state to return from inquirer.
                     global.state = { answers: answers };
                 })
                 .catch(err => {

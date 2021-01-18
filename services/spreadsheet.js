@@ -77,13 +77,6 @@ module.exports = {
             }
         }, 100);
 
-
-        // // Creating to database
-        // var dalAddEmployee = new DalAddEmployee();
-        // dalAddEmployee.create();
-
-        // // Trigger event to go to next screen: Show updated spreadsheet
-        // eventEmitter.emit(constantMenuOptions.answeredAddEmployee);
     },
     hirerAddedEmployee: function(newEmployeeObj) {
         const DalAddedEmployee = require("../dal/DalAddedEmployee");
